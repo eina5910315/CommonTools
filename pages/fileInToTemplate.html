@@ -3,12 +3,19 @@
 
 <head>
     <meta charset="utf-8">
-    <script src="/script/fileInToTemplate.js"></script>
-    <title>ファイル内容埋め込みツール</title>
+    <script src="../script/fileInToTemplate.js"></script>
+    <script src="../script/HTMLFileReader.js"></script>
+    <title>CSVデータ埋め込みツール</title>
 </head>
 
-<body>
+<body onload="init()">
     <h2>test</h2>
+    <textarea id="template"></textarea>
+    <input id="separator" type="text" />
+    <input id="file" type="file" accept="txt,csv,tsv" />
+    <input type="button" value="test" onclick="convert()" />
+    <hr>
+    <div id="result"></div>
 </body>
 
 </html>
