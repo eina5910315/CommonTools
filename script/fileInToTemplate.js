@@ -1,59 +1,106 @@
-fileInToTemplate();
+class Controller {
+    constructor() {
+    }
 
-function fileInToTemplate() {
-    const file = getFile();
-    const s = getSeparator();
-    const t = getTemplate();
+    init() {
+        this.view = new View();
+    }
 
-    const data = convertData(file, s);
-    printResult(dataInToTemplate(t, data.header, data.value));
-}
-
-function getFile() {
-    const file = `id,name,age
-1,a,12
-2,b
-3,,23`;
-    return file;
-}
-
-function getSeparator() {
-    const s = ",";
-    return s;
-}
-
-function getTemplate() {
-    const t = "idは{!id}、名前は{!name}、年は{!age}";
-    return t;
-}
-
-function convertData(data = "", separator = "") {
-    const spData = data.split("\n");
-    const result = {};
-    result["header"] = spData[0].split(separator);
-    result["value"] = spData.slice(1).filter(v => v).map(v => {
-        const value = v.split(separator);
-        const o = {};
-        for (i in result["header"]) {
-            o[result["header"][i]] = value[i];
+    async fileInToTemplate() {
+        try {
+            const f = await this.view.getFileText();
+            const data = this.convertData(f, this.view.getSeparator());
+            const template = this.view.getTemplate();
+            const result = this.dataInToTemplate(template, data.header, data.value)
+            this.view.printResult(result);
+        } catch (error) {
+            console.log(error);
         }
-        return o;
-    });
-    return result;
-}
+    }
 
-function dataInToTemplate(template = "", header = [""], valueList = [""]) {
-    const result = [];
-    valueList.forEach(value => {
-        let t = template;
-        header.forEach(h => {
-            t = t.replace(`{!${h}}`, value[h] || "");
+    convertData(data = "", separator = "") {
+        const spData = data.replace(/\r?\n|\r\n?/g, "\n").split("\n");
+        const result = {};
+        result["header"] = spData[0].split(separator);
+        result["value"] = spData.slice(1).filter(v => v).map(v => {
+            const value = v.split(separator);
+            const o = {};
+            for (let i in result["header"]) {
+                o[result["header"][i]] = value[i];
+            }
+            return o;
         });
-        result.push(t);
-    });
-    return result;
+        return result;
+    }
+
+    dataInToTemplate(template = "", header = [""], valueList = [""]) {
+        const result = [];
+        valueList.forEach(value => {
+            let t = template;
+            header.forEach(h => {
+                t = t.replace(`{!${h}}`, value[h] || "");
+            });
+            result.push(t);
+        });
+        return result;
+    }
 }
 
-function printResult(resultList = [""]) {
-    resultList.forEach(r => console.log(r));
+class View {
+    constructor() {
+        this.file = new HTMLFileReader("file");
+        this.template = document.getElementById("template");
+        this.template.append(`{
+    id: "{!id}",
+    name: "{!name}",
+    id: {!age}
+}`);
+        this.separator = document.getElementById("separator");
+        this.separator.value = ",";
+    }
+
+    async getFileText() {
+        return this.file.readAsText();
+    }
+
+    getSeparator() {
+        return this.separator.value;
+    }
+
+    getTemplate() {
+        return this.template.value;
+    }
+
+    printResult(resultList = [""]) {
+        const div = document.getElementById("result");
+        div.innerHTML = "";
+        resultList.forEach(result => {
+            const textarea = document.createElement("textarea");
+            result.split("\n").forEach(t => {
+                textarea.append(t);
+            });
+            div.append(textarea);
+            const button = document.createElement("button");
+            button.addEventListener("click", () => {
+                const test = textarea.value;
+                console.log(test);
+                textarea.select();
+                document.execCommand("copy");
+            });
+            button.append("copy")
+            div.append(button);
+            const hr = document.createElement("hr");
+            div.append(hr);
+        });
+    }
 }
+
+function init() {
+    con.init();
+}
+
+function convert() {
+    con.fileInToTemplate();
+}
+
+const con = new Controller();
