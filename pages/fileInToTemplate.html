@@ -5,15 +5,15 @@
     <meta charset="utf-8">
     <script src="../script/fileInToTemplate.js"></script>
     <script src="../script/HTMLFileReader.js"></script>
-    <title>CSVデータ埋め込みツール</title>
+    <title>CSVデータ変換ツール</title>
 </head>
 
 <body onload="init()">
-    <h2>CSVデータ埋め込みツール</h2>
+    <h2>CSVデータ変換ツール</h2>
     <textarea id="template" rows="10" cols="50"></textarea>
     <input id="separator" type="text" />
     <input id="file" type="file" accept="txt,csv,tsv" />
-    <input type="button" value="test" onclick="convert()" />
+    <button onclick="convert()">convert</button>
     <hr>
     <div id="result"></div>
 </body>
