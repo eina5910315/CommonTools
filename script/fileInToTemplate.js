@@ -76,13 +76,10 @@ class View {
         div.innerHTML = "";
         resultList.forEach(result => {
             const textarea = document.createElement("textarea");
-            result.split("\n").forEach(t => {
-                textarea.append(t);
-            });
+            textarea.append(result);
             div.append(textarea);
             const button = document.createElement("button");
             button.addEventListener("click", () => {
-                const test = textarea.value;
                 textarea.select();
                 document.execCommand("copy");
             });
