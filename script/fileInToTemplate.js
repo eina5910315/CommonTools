@@ -53,7 +53,7 @@ class View {
         this.template.append(`{
     id: "{!id}",
     name: "{!name}",
-    id: {!age}
+    age: {!age}
 }`);
         this.separator = document.getElementById("separator");
         this.separator.value = ",";
