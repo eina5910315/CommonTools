@@ -83,7 +83,6 @@ class View {
             const button = document.createElement("button");
             button.addEventListener("click", () => {
                 const test = textarea.value;
-                console.log(test);
                 textarea.select();
                 document.execCommand("copy");
             });
