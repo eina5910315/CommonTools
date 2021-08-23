@@ -77,6 +77,8 @@ class View {
         resultList.forEach(result => {
             const textarea = document.createElement("textarea");
             textarea.append(result);
+            textarea.setAttribute("rows", "10");
+            textarea.setAttribute("cols", "50");
             div.append(textarea);
             const button = document.createElement("button");
             button.addEventListener("click", () => {
