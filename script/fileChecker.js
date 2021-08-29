@@ -38,7 +38,7 @@ class Controller {
 
 
     dataInToTemplate(header = [""], valueList = [""]) {
-        const template = `${header[0]}:{!${header[0]}}`;
+        const template = `{!${header[0]}}`;
         const result = [];
         valueList.forEach(value => {
             let t = template;
@@ -72,36 +72,59 @@ class View {
             c.checked = false;
             c.closest(".item").classList.remove("checked");
         });
+        this.countItem();
     }
 
     printResult(resultList = [""]) {
         const div = document.getElementById("result");
         div.innerHTML = "";
+        const left = document.createElement("div");
+        left.id = "left";
+        const right = document.createElement("div");
+        right.id = "right";
         resultList.forEach((result, i) => {
-            const id = String(i);
-
-            const item = document.createElement("div");
-            item.classList = ["item"];
-
-            const label = document.createElement("label");
-            label.for = id;
-
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.id = id;
-            checkbox.addEventListener("change", (e) => {
-                if (e.target.checked) {
-                    e.target.closest(".item").classList.add("checked");
-                } else {
-                    e.target.closest(".item").classList.remove("checked");
-                }
-            });
-            label.append(checkbox);
-            label.append(result);
-
-            item.append(label);
-            div.append(item);
+            const item = this.createItem(String(i), result);
+            left.append(item);
         });
+        div.append(left);
+        div.append(right);
+        this.countItem();
+    }
+
+    createItem(id, text) {
+        const item = document.createElement("div");
+        item.classList = ["item"];
+
+        const label = document.createElement("label");
+        label.for = id;
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = id;
+        checkbox.addEventListener("change", (e) => {
+            if (e.target.checked) {
+                e.target.closest(".item").classList.add("checked");
+            } else {
+                e.target.closest(".item").classList.remove("checked");
+            }
+            this.countItem();
+        });
+        label.append(checkbox);
+        label.append(text);
+
+        item.append(label);
+        return item;
+    }
+
+    countItem() {
+        const right = document.getElementById("right");
+        right.innerHTML = "";
+
+        const h2 = document.createElement("h2");
+        const total = document.querySelectorAll("input[type='checkbox']").length;
+        const now = document.querySelectorAll("input[type='checkbox']:checked").length;
+        h2.append(`${now} / ${total}`);
+        right.append(h2);
     }
 }
 
