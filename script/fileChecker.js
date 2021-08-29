@@ -13,7 +13,7 @@ class Controller {
     async fileInToTemplate() {
         try {
             const f = await this.view.getFileText();
-            const data = this.convertData(f, this.view.getSeparator());
+            const data = this.convertData(f);
             const result = this.dataInToTemplate(data.header, data.value);
             this.view.printResult(result);
         } catch (error) {
@@ -21,30 +21,25 @@ class Controller {
         }
     }
 
-    convertData(data = "", separator = "") {
+    convertData(data = "") {
         const spData = data.replace(/\r?\n|\r/g, "\n").split("\n");
         const result = {};
-        result["header"] = spData[0].split(separator);
+        result["header"] = spData[0];
         result["value"] = spData.slice(1).filter(v => v).map(v => {
-            const value = v.split(separator);
-            const o = {};
-            for (let i in result["header"]) {
-                o[result["header"][i]] = value[i];
-            }
-            return o;
+            return {
+                [result["header"]]: v,
+            };
         });
         return result;
     }
 
 
-    dataInToTemplate(header = [""], valueList = [""]) {
-        const template = `{!${header[0]}}`;
+    dataInToTemplate(header = "", valueList = [{}]) {
+        const template = `{!${header}}`;
         const result = [];
         valueList.forEach(value => {
             let t = template;
-            header.forEach(h => {
-                t = t.replace(`{!${h}}`, value[h] || "");
-            });
+            t = t.replace(`{!${header}}`, value[header] || "");
             result.push(t);
         });
         return result;
@@ -54,16 +49,10 @@ class Controller {
 class View {
     constructor() {
         this.file = new HTMLFileReader("file");
-        this.separator = document.getElementById("separator");
-        this.separator.value = ",";
     }
 
     async getFileText() {
         return this.file.readAsText();
-    }
-
-    getSeparator() {
-        return this.separator.value;
     }
 
     resetCheck() {
