@@ -3,6 +3,11 @@
 }
 
 #result {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#left {
     width: 630px;
     display: flex;
     flex-wrap: wrap;
@@ -15,6 +20,10 @@ div.item {
     margin: 5px;
 }
 
+div.checked {
+    background-color: #aaaaaa;
+}
+
 label {
     line-height: 40px;
     display: inline-block;
@@ -23,6 +32,11 @@ label {
     padding: 0 0 0 10px;
 }
 
-.checked {
-    background-color: #aaaaaa;
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#right > h2 {
+    width: 115px;
+    text-align: right;
 }
