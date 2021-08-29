@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+}
+
+#result {
+    width: 630px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div.item {
+    width: 200px;
+    height: 40px;
+    border: solid 1px #000000;
+    margin: 5px;
+}
+
+label {
+    line-height: 40px;
+    display: inline-block;
+    height: 40px;
+    width: 200px;
+    padding: 0 0 0 10px;
+}
+
+.checked {
+    background-color: #aaaaaa;
+}
