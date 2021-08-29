@@ -3,17 +3,18 @@
 
 <head>
     <meta charset="utf-8">
-    <script src="../script/fileInToTemplate.js"></script>
+    <script src="../script/fileChecker.js"></script>
     <script src="../script/HTMLFileReader.js"></script>
-    <title>データ整形</title>
+    <link rel="stylesheet" href="../style/fileChecker.css" />
+    <title>チェッカー</title>
 </head>
 
 <body onload="init()">
-    <h2>データ整形</h2>
-    <textarea id="template" rows="10" cols="50"></textarea>
+    <h2>チェッカー</h2>
     <input id="separator" type="text" />
     <input id="file" type="file" accept="txt,csv,tsv" />
     <button onclick="convert()">convert</button>
+    <button onclick="reset()">reset</button>
     <hr>
     <div id="result"></div>
 </body>
