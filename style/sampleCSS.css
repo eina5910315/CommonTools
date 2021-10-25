@@ -1,0 +1,35 @@
+.img1 {
+    width: 200px;
+}
+
+/* 文字フェードイン */
+
+@keyframes strFadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.strFadein {
+    opacity: 0;
+    animation: 1s 0s both strFadein;
+}
+
+/* 画像フェードイン */
+
+@keyframes imgFadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.imgFadein {
+    opacity: 0;
+    animation: 3s 1s both imgFadein;
+}
