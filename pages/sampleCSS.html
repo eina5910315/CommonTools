@@ -4,19 +4,30 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../style/sampleCSS.css" />
+    <script src="../script/sampleCSS.js"></script>
     <title>サンプルCSS集</title>
 </head>
 
-<body onload="init()">
+<body>
     <h2>サンプルCSS集</h2>
-    <h3>文字フェードイン</h3>
-    <div>
-        <h4 class="strFadein">フェードイン</h4>
+    <h3>フェードイン</h3>
+    <div id="fadein" class="fadein animation">
+        <img class="img1" src="../img/money_kasoutsuuka_kusa_shibafu.png" />
     </div>
-    <h3>画像フェードイン</h3>
-    <div>
-        <img class="img1 imgFadein" src="../img/money_kasoutsuuka_kusa_shibafu.png" />
+    <button onclick="restertAnimation('fadein')">再生</button>
+    <hr />
+    <h3>スライドイン</h3>
+    <div id="slidein" class="slidein animation">
+        <img class="img1" src="../img/money_kasoutsuuka_kusa_shibafu.png" />
     </div>
+    <button onclick="restertAnimation('slidein')">再生</button>
+    <hr />
+    <h3>フェードイン + スライドイン</h3>
+    <div id="fadeslidein" class="fadein slidein animation">
+        <img class="img1" src="../img/money_kasoutsuuka_kusa_shibafu.png" />
+    </div>
+    <button onclick="restertAnimation('fadeslidein')">再生</button>
+    <hr />
 </body>
 
 </html>

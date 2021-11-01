@@ -1,10 +1,14 @@
+div {
+    width: fit-content;
+}
+
 .img1 {
     width: 200px;
 }
 
-/* 文字フェードイン */
+/* フェードイン */
 
-@keyframes strFadein {
+@keyframes fadein {
     from {
         opacity: 0;
     }
@@ -13,23 +17,35 @@
     }
 }
 
-.strFadein {
+.fadein {
     opacity: 0;
-    animation: 1s 0s both strFadein;
 }
 
-/* 画像フェードイン */
+.fadein.animation {
+    animation: fadein 1s 1s both;
+}
 
-@keyframes imgFadein {
+/* スライドイン */
+
+@keyframes slidein {
     from {
-        opacity: 0;
+        transform: translateX(50vw);
     }
     to {
-        opacity: 1;
+        transform: translateX(0);
     }
 }
 
-.imgFadein {
-    opacity: 0;
-    animation: 3s 1s both imgFadein;
+.slidein {
+    transform: translateX(50vw);
+}
+
+.slidein.animation {
+    animation: slidein 1s 1s both;
+}
+
+/* フェードイン + スライドイン */
+
+.fadein.slidein.animation {
+    animation: fadein 1s 1s both, slidein 1s 1s both;
 }
