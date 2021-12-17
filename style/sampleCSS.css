@@ -12,6 +12,7 @@ div {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -31,6 +32,7 @@ div {
     from {
         transform: translateX(50vw);
     }
+
     to {
         transform: translateX(0);
     }
@@ -46,6 +48,6 @@ div {
 
 /* フェードイン + スライドイン */
 
-.fadein.slidein.animation {
+.fade-slidein.animation {
     animation: fadein 1s 1s both, slidein 1s 1s both;
 }
