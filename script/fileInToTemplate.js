@@ -38,7 +38,7 @@ class Controller {
         valueList.forEach(value => {
             let t = template;
             header.forEach(h => {
-                t = t.replace(`{!${h}}`, value[h] || "");
+                t = t.replaceAll(`{!${h}}`, value[h] || "");
             });
             result.push(t);
         });
