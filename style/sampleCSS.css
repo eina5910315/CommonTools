@@ -26,6 +26,26 @@ div {
     animation: fadein 1s 1s both;
 }
 
+/* フェードアウト */
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.fadeout {
+    opacity: 0;
+}
+
+.fadeout.animation {
+    animation: fadeout 1s 0s both;
+}
+
 /* スライドイン */
 
 @keyframes slidein {

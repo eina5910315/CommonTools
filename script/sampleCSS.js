@@ -1,11 +1,13 @@
-function init() {
-    scrolleAnimation();
+function loadAnimation() {
+    const l = document.querySelectorAll(".load-animation");
+    l.forEach(t => {
+        t.classList.add('animation');
+    });
 }
 
 function scrolleAnimation() {
-    const l = document.querySelectorAll(".scrolleAnimation");
+    const l = document.querySelectorAll(".scrolle-animation");
     const margin = 150;
-    console.log(l);
     window.addEventListener("scroll", () => {
         l.forEach(t => {
             const rect = t.getBoundingClientRect().top;
@@ -18,6 +20,11 @@ function scrolleAnimation() {
         });
     });
 }
+
+window.addEventListener("load", function () {
+    loadAnimation();
+    scrolleAnimation();
+});
 
 async function restertAnimation(target) {
     const t = document.getElementById(target);
